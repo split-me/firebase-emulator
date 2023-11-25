@@ -1,6 +1,6 @@
 FROM node:gallium-alpine
 
-ENV FIREBASE_TOOLS_VERSION=11.25.2
+ENV FIREBASE_TOOLS_VERSION=12.9.1
 RUN yarn global add firebase-tools@${FIREBASE_TOOLS_VERSION} && \
     yarn cache clean && \
     firebase -V && \
@@ -11,10 +11,6 @@ RUN firebase setup:emulators:database
 RUN firebase setup:emulators:ui
 
 RUN mkdir -p /firebase
-
-# TODO: update for newer version of firebase
-# COPY cache-static.sh /usr/bin/
-# RUN cache-static.sh
 
 COPY serve.sh healthcheck.sh /usr/bin/
 COPY nginx.conf.template /etc/nginx/
